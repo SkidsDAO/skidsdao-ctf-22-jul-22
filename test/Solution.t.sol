@@ -21,14 +21,6 @@ contract SolutionTest is Test {
     }
 
     function testHack() public {
-        // Try sending 0x69696969 as first 4 bytes to trigger to get into NOT_A_RUG_PULL()
-        // and then send 0x46 as the calldata so that it will get past the loop
-        bytes memory payload = abi.encodeWithSelector(bytes4(0x69696969), 0x46);
-        vm.startPrank(hacker);
-        (bool success, bytes memory returnData) = address(vault).call{value: 0.001 ether}(payload);
-        require(success);
-        // After the "come and take it" WITHDRAW() line, there is no return or JUMP so it continues to execute
-        // down to the not_valid JUMPDEST and then reverts on the next line.  So close!!
     }
 
 }
